@@ -1,0 +1,47 @@
+(function() {
+    const chatButton = document.createElement("div");
+    chatButton.textContent = "💬";
+    chatButton.style.position = "fixed";
+    chatButton.style.bottom = "20px";
+    chatButton.style.right = "20px";
+    chatButton.style.background = "#007bff";
+    chatButton.style.color = "#fff";
+    chatButton.style.borderRadius = "50%";
+    chatButton.style.width = "60px";
+    chatButton.style.height = "60px";
+    chatButton.style.display = "flex";
+    chatButton.style.alignItems = "center";
+    chatButton.style.justifyContent = "center";
+    chatButton.style.fontSize = "24px";
+    chatButton.style.cursor = "pointer";
+    chatButton.style.zIndex = "9999";
+    document.body.appendChild(chatButton);
+
+    // Get or create a unique user ID
+    let userId = localStorage.getItem("chatbot_user_id");
+    if (!userId) {
+        userId = crypto.randomUUID();
+        localStorage.setItem("chatbot_user_id", userId);
+    }
+
+    let iframe = null;
+
+    chatButton.addEventListener("click", () => {
+        if (!iframe) {
+            iframe = document.createElement("iframe");
+            iframe.src = "{{DOMAIN}}/widget-chat/" + userId;
+            iframe.style.position = "fixed";
+            iframe.style.bottom = "90px";
+            iframe.style.right = "20px";
+            iframe.style.width = "350px";
+            iframe.style.height = "500px";
+            iframe.style.border = "none";
+            iframe.style.borderRadius = "10px";
+            iframe.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.2)";
+            iframe.style.zIndex = "9998";
+            document.body.appendChild(iframe);
+        } else {
+            iframe.style.display = iframe.style.display === "none" ? "block" : "none";
+        }
+    });
+})();

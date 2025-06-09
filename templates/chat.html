@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Pirate Assistant</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="chat-container">
+    <!-- Top bar with title and reset -->
+    <div class="top-bar">
+      <span class="chat-title">Pirate Assistant</span>
+      <button id="reset-btn" type="button" title="Reset Conversation">↻</button>
+    </div>
+
+    <div class="response-box" id="chat-box">
+      {% for msg in history %}
+        <div class="message {{ msg.role }}">
+          <strong>{{ msg.role.title() }}:</strong> {{ msg.content }}
+        </div>
+      {% endfor %}
+    </div>
+
+    <form id="chat-form">
+      <textarea id="user_input" name="user_input" placeholder="Ask a question, matey..."></textarea>
+      <button type="submit">Send</button>
+    </form>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
