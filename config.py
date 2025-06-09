@@ -8,7 +8,6 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 SECRET_KEY = "a-very-secret-key"
 
-# Build absolute paths
 EMBEDDINGS_PATH = os.path.join(BASE_DIR, "data", "pdf_embeddings.index")
 CHUNKS_PATH = os.path.join(BASE_DIR, "data", "pdf_chunks.pkl")
 PDF_PATH = os.path.join(BASE_DIR, "manuals", "my_manual.pdf")

@@ -3,7 +3,7 @@ from config import *
 import os
 
 widget_bp = Blueprint("widget", __name__)
-user_histories = {}  # Keep per-session memory
+user_histories = {}
 
 @widget_bp.route("/widget-chat/<user_id>")
 def widget_chat(user_id):
@@ -21,8 +21,7 @@ def widget_chat(user_id):
 @widget_bp.route("/widget.js")
 def widget_js():
     try:
-        # Get the full path to the template
-        base_dir = os.path.dirname(os.path.abspath(__file__))  # This is routes/
+        base_dir = os.path.dirname(os.path.abspath(__file__))
         template_path = os.path.join(base_dir, "..", "static", "widget_templates", "widget.js.template")
 
         with open(template_path, "r") as file:
