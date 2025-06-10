@@ -3,7 +3,7 @@ from config import *
 import os
 
 widget_bp = Blueprint("widget", __name__)
-user_histories = {}
+user_histories = {} 
 
 @widget_bp.route("/widget-chat/<user_id>")
 def widget_chat(user_id):

@@ -36,19 +36,22 @@ def send_message():
     relevant_chunks = get_relevant_chunks(user_input, index, chunks)
     context = "\n\n".join(relevant_chunks)
 
-    prompt = f"""
-You are a helpful assistant. Use the following information from a product manual to answer the user's question.
+    # No extra tone override here, just informative context
+    user_prompt = f"""
+Here be some nuggets of wisdom from the ship's log:
 
-Manual excerpts:
 {context}
 
-User question: {user_input}
+Now answer this, ye scurvy dog: {user_input}
 """
 
     try:
         response = client.chat.completions.create(
             model="gpt-4o",
-            messages=[{"role": "user", "content": prompt}]
+            messages=[
+                {"role": "system", "content": SYSTEM_INSTRUCTION},
+                {"role": "user", "content": user_prompt}
+            ]
         )
         reply = response.choices[0].message.content.strip()
         return jsonify({"reply": reply})
